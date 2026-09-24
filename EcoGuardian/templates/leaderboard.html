@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}
+Leaderboard | EcoGuardian
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <span class="badge bg-success mb-3">
+            Community
+        </span>
+
+        <h2 class="fw-bold">
+            🏅 EcoGuardian Leaderboard
+        </h2>
+
+        <p class="text-muted">
+            Community members ranked by Eco Points.
+        </p>
+
+    </div>
+
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body p-0">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover mb-0">
+
+                            <thead class="table-success">
+
+                                <tr>
+
+                                    <th>
+                                        Rank
+                                    </th>
+
+                                    <th>
+                                        Participant
+                                    </th>
+
+                                    <th>
+                                        Eco Points
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                            {% for person in leaderboard %}
+
+                                <tr>
+
+                                    <td class="fw-bold">
+
+                                        {% if person.ranking == 1 %}
+                                            🥇
+                                        {% elif person.ranking == 2 %}
+                                            🥈
+                                        {% elif person.ranking == 3 %}
+                                            🥉
+                                        {% else %}
+                                            {{ person.ranking }}
+                                        {% endif %}
+
+                                    </td>
+
+                                    <td>
+                                        {{ person.name }}
+                                    </td>
+
+                                    <td>
+
+                                        <span class="badge bg-success">
+
+                                            {{ person.eco_points }}
+
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                            {% else %}
+
+                                <tr>
+
+                                    <td
+                                        colspan="3"
+                                        class="text-center py-4">
+
+                                        No participants yet.
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

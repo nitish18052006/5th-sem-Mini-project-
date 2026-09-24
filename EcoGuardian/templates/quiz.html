@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}
+Eco Quiz | EcoGuardian
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <span class="badge bg-success mb-3">
+            Knowledge Challenge
+        </span>
+
+        <h2 class="fw-bold">
+            🧠 Environmental Awareness Quiz
+        </h2>
+
+        <p class="text-muted">
+            Test your environmental knowledge and earn Eco Points.
+        </p>
+
+    </div>
+
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-9">
+
+            <form
+                method="POST"
+                action="{{ url_for('quiz.submit_quiz') }}">
+
+                {% for question in questions %}
+
+                <div class="card shadow-sm mb-4">
+
+                    <div class="card-body p-4">
+
+                        <h5 class="fw-bold">
+
+                            Question {{ loop.index }}
+
+                        </h5>
+
+                        <p class="lead">
+                            {{ question.question }}
+                        </p>
+
+
+                        <div class="form-check mb-2">
+
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="q_{{ question.id }}"
+                                value="A"
+                                id="q{{ question.id }}a"
+                                required>
+
+                            <label
+                                class="form-check-label"
+                                for="q{{ question.id }}a">
+
+                                A. {{ question.option_a }}
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="form-check mb-2">
+
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="q_{{ question.id }}"
+                                value="B"
+                                id="q{{ question.id }}b">
+
+                            <label
+                                class="form-check-label"
+                                for="q{{ question.id }}b">
+
+                                B. {{ question.option_b }}
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="form-check mb-2">
+
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="q_{{ question.id }}"
+                                value="C"
+                                id="q{{ question.id }}c">
+
+                            <label
+                                class="form-check-label"
+                                for="q{{ question.id }}c">
+
+                                C. {{ question.option_c }}
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="q_{{ question.id }}"
+                                value="D"
+                                id="q{{ question.id }}d">
+
+                            <label
+                                class="form-check-label"
+                                for="q{{ question.id }}d">
+
+                                D. {{ question.option_d }}
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+
+                <div class="text-center">
+
+                    <button
+                        type="submit"
+                        class="btn btn-success btn-lg px-5">
+
+                        Submit Quiz
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

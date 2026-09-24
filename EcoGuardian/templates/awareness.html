@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}
+Environmental Awareness | EcoGuardian
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold">
+            Environmental Awareness
+        </h2>
+
+        <p class="text-muted">
+            Learn how environmental problems affect our planet
+            and discover practical solutions.
+        </p>
+
+    </div>
+
+
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-5">
+
+        <a
+            href="{{ url_for('awareness.awareness') }}"
+            class="btn
+            {% if not selected_category %}
+                btn-success
+            {% else %}
+                btn-outline-success
+            {% endif %}">
+
+            All
+
+        </a>
+
+        {% for category in categories %}
+
+        <a
+            href="{{ url_for(
+                'awareness.awareness',
+                category=category
+            ) }}"
+            class="btn
+            {% if selected_category == category %}
+                btn-success
+            {% else %}
+                btn-outline-success
+            {% endif %}">
+
+            {{ category }}
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+
+    <div class="row g-4">
+
+        {% for article in articles %}
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body">
+
+                    <span class="badge bg-success mb-3">
+                        {{ article.category }}
+                    </span>
+
+                    <h4>
+                        {{ article.title }}
+                    </h4>
+
+                    <p class="text-muted">
+                        {{ article.summary }}
+                    </p>
+
+                    <a
+                        href="{{ url_for(
+                            'awareness.article',
+                            article_id=article.id
+                        ) }}"
+                        class="btn btn-success">
+
+                        Read More
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="col-12 text-center">
+
+            <p class="text-muted">
+                No awareness articles available.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,427 @@
+{% extends "base.html" %}
+
+{% block title %}
+Admin Dashboard | EcoGuardian
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-5">
+
+    <div class="container">
+
+        <div class="mb-4">
+
+            <span class="badge bg-dark mb-2">
+                Administrator
+            </span>
+
+            <h2 class="fw-bold">
+                📊 EcoGuardian Admin Dashboard
+            </h2>
+
+            <p class="text-muted">
+                Monitor users, environmental reports and
+                community activity.
+            </p>
+
+        </div>
+
+
+        <!-- Statistics -->
+
+        <div class="row g-4 mb-5">
+
+            <div class="col-md-3">
+
+                <div class="dashboard-stat">
+
+                    <div class="stat-icon">
+                        👥
+                    </div>
+
+                    <h3>
+                        {{ total_users }}
+                    </h3>
+
+                    <p>
+                        Registered Users
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="dashboard-stat">
+
+                    <div class="stat-icon">
+                        📢
+                    </div>
+
+                    <h3>
+                        {{ total_reports }}
+                    </h3>
+
+                    <p>
+                        Total Reports
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="dashboard-stat">
+
+                    <div class="stat-icon">
+                        ⏳
+                    </div>
+
+                    <h3>
+                        {{ pending_reports }}
+                    </h3>
+
+                    <p>
+                        Pending Reports
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="dashboard-stat">
+
+                    <div class="stat-icon">
+                        ✅
+                    </div>
+
+                    <h3>
+                        {{ resolved_reports }}
+                    </h3>
+
+                    <p>
+                        Resolved Reports
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Community Index -->
+
+        <div class="card shadow-sm mb-5">
+
+            <div class="card-body text-center p-4">
+
+                <h5>
+                    🌱 Community Eco Index
+                </h5>
+
+                <div class="display-5 text-success fw-bold">
+
+                    {{ eco_index }}
+
+                </div>
+
+                <p class="text-muted mb-0">
+
+                    Average Eco Points per registered user
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="row g-4 mb-5">
+
+            <!-- Category Analytics -->
+
+            <div class="col-lg-6">
+
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-header bg-success text-white">
+
+                        <h5 class="mb-0">
+                            Reports by Category
+                        </h5>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        {% for item in category_data %}
+
+                        <div class="mb-3">
+
+                            <div class="d-flex justify-content-between">
+
+                                <span>
+                                    {{ item.category }}
+                                </span>
+
+                                <strong>
+                                    {{ item.total }}
+                                </strong>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div
+                                    class="progress-bar bg-success"
+                                    style="width:
+                                    {{ item.total * 10 if item.total < 10 else 100 }}%;">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {% else %}
+
+                        <p class="text-muted">
+                            No report data available.
+                        </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Status Analytics -->
+
+            <div class="col-lg-6">
+
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-header bg-dark text-white">
+
+                        <h5 class="mb-0">
+                            Reports by Status
+                        </h5>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        {% for item in status_data %}
+
+                        <div class="d-flex justify-content-between
+                                    border-bottom py-3">
+
+                            <span>
+                                {{ item.status }}
+                            </span>
+
+                            <span class="badge bg-success">
+
+                                {{ item.total }}
+
+                            </span>
+
+                        </div>
+
+                        {% else %}
+
+                        <p class="text-muted">
+                            No status data available.
+                        </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Recent Reports -->
+
+        <div class="card shadow-sm">
+
+            <div class="card-header bg-success text-white">
+
+                <h5 class="mb-0">
+                    Recent Environmental Reports
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Severity</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        {% for report in recent_reports %}
+
+                            <tr>
+
+                                <td>
+                                    #{{ report.id }}
+                                </td>
+
+                                <td>
+                                    {{ report.user_name }}
+                                </td>
+
+                                <td>
+                                    {{ report.title }}
+                                </td>
+
+                                <td>
+                                    {{ report.category }}
+                                </td>
+
+                                <td>
+                                    {{ report.severity }}
+                                </td>
+
+                                <td>
+
+                                    <span class="badge bg-warning text-dark">
+
+                                        {{ report.priority_score }}
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+                                    {{ report.status }}
+                                </td>
+
+                                <td>
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for(
+                                            'admin.update_report_status',
+                                            report_id=report.id
+                                        ) }}">
+
+                                        <select
+                                            name="status"
+                                            class="form-select form-select-sm"
+                                            onchange="this.form.submit()">
+
+                                            <option
+                                                value="Submitted"
+                                                {% if report.status == "Submitted" %}
+                                                selected
+                                                {% endif %}>
+                                                Submitted
+                                            </option>
+
+                                            <option
+                                                value="Under Review"
+                                                {% if report.status == "Under Review" %}
+                                                selected
+                                                {% endif %}>
+                                                Under Review
+                                            </option>
+
+                                            <option
+                                                value="In Progress"
+                                                {% if report.status == "In Progress" %}
+                                                selected
+                                                {% endif %}>
+                                                In Progress
+                                            </option>
+
+                                            <option
+                                                value="Resolved"
+                                                {% if report.status == "Resolved" %}
+                                                selected
+                                                {% endif %}>
+                                                Resolved
+                                            </option>
+
+                                            <option
+                                                value="Rejected"
+                                                {% if report.status == "Rejected" %}
+                                                selected
+                                                {% endif %}>
+                                                Rejected
+                                            </option>
+
+                                        </select>
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+                        {% else %}
+
+                            <tr>
+
+                                <td
+                                    colspan="8"
+                                    class="text-center py-4">
+
+                                    No reports available.
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

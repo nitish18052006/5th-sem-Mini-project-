@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}
+AI Environmental Assistant | EcoGuardian
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <span class="badge bg-success mb-3">
+            Artificial Intelligence
+        </span>
+
+        <h2 class="fw-bold">
+            🤖 AI Environmental Assistant
+        </h2>
+
+        <p class="text-muted">
+            Describe an environmental problem and let
+            EcoGuardian classify it using an AI-based
+            NLP model.
+        </p>
+
+    </div>
+
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-9">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <form method="POST">
+
+                        <label class="form-label fw-bold">
+                            Describe the Environmental Problem
+                        </label>
+
+                        <textarea
+                            name="problem"
+                            class="form-control"
+                            rows="6"
+                            placeholder="Example: A large amount of plastic waste is being dumped near the lake..."
+                            required>{{ user_text }}</textarea>
+
+                        <button
+                            type="submit"
+                            class="btn btn-success mt-3">
+
+                            🔍 Analyze Problem
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            {% if result %}
+
+            <div class="card shadow-sm mt-4">
+
+                <div class="card-header bg-success text-white">
+
+                    <h5 class="mb-0">
+                        AI Analysis Result
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <div class="result-box">
+
+                                <small class="text-muted">
+                                    Predicted Category
+                                </small>
+
+                                <h3 class="text-success">
+                                    {{ result.category }}
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                            <div class="result-box">
+
+                                <small class="text-muted">
+                                    Confidence
+                                </small>
+
+                                <h3>
+                                    {{ result.confidence }}%
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                            <div class="result-box">
+
+                                <small class="text-muted">
+                                    Severity
+                                </small>
+
+                                <h3>
+                                    {{ result.severity }}
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mt-4">
+
+                        <h5>
+                            Priority Score
+                        </h5>
+
+                        <div class="progress"
+                             style="height: 25px;">
+
+                            <div
+                                class="progress-bar bg-success"
+                                role="progressbar"
+                                style="width: {{ result.priority_score }}%;">
+
+                                {{ result.priority_score }}/100
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row mt-4">
+
+                        <div class="col-md-6">
+
+                            <h5>
+                                Possible Environmental Impacts
+                            </h5>
+
+                            <ul>
+
+                                {% for impact in result.impacts %}
+
+                                <li>
+                                    {{ impact }}
+                                </li>
+
+                                {% endfor %}
+
+                            </ul>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <h5>
+                                Recommended Solutions
+                            </h5>
+
+                            <ul>
+
+                                {% for solution in result.solutions %}
+
+                                <li>
+                                    {{ solution }}
+                                </li>
+
+                                {% endfor %}
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

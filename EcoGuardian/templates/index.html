@@ -1,0 +1,319 @@
+{% extends "base.html" %}
+
+{% block title %}
+EcoGuardian | Home
+{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-7">
+
+                <span class="badge bg-success mb-3">
+                    AI-Powered Environmental Platform
+                </span>
+
+                <h1 class="display-4 fw-bold">
+                    Protect Our Planet.
+                    <br>
+                    <span class="text-success">
+                        One Action at a Time.
+                    </span>
+                </h1>
+
+                <p class="lead mt-3">
+                    EcoGuardian is an intelligent environmental
+                    awareness and community action platform that
+                    helps people understand environmental issues,
+                    report problems and participate in eco-friendly
+                    activities.
+                </p>
+
+                <div class="mt-4">
+
+                    {% if current_user %}
+
+                    <a href="{{ url_for('dashboard.dashboard') }}"
+                       class="btn btn-success btn-lg me-2">
+                        Go to Dashboard
+                    </a>
+
+                    <a href="{{ url_for('reports.new_report') }}"
+                       class="btn btn-outline-success btn-lg">
+                        Report an Issue
+                    </a>
+
+                    {% else %}
+
+                    <a href="{{ url_for('auth.register') }}"
+                       class="btn btn-success btn-lg me-2">
+                        Get Started
+                    </a>
+
+                    <a href="{{ url_for('assistant.assistant') }}"
+                       class="btn btn-outline-success btn-lg">
+                        Try AI Assistant
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-5 text-center mt-5 mt-lg-0">
+
+                <div class="eco-globe">
+                    🌍
+                </div>
+
+                <h4 class="mt-3">
+                    Build a Sustainable Future
+                </h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold">
+            What EcoGuardian Offers
+        </h2>
+
+        <p class="text-muted">
+            Technology-driven tools for environmental awareness
+            and community participation.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="card feature-card h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="feature-icon">
+                        🤖
+                    </div>
+
+                    <h4>
+                        AI Environmental Assistant
+                    </h4>
+
+                    <p>
+                        Describe an environmental problem and
+                        the AI system identifies its likely
+                        category, severity and possible solutions.
+                    </p>
+
+                    <a href="{{ url_for('assistant.assistant') }}"
+                       class="btn btn-outline-success">
+                        Try Assistant
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card feature-card h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="feature-icon">
+                        📢
+                    </div>
+
+                    <h4>
+                        Smart Issue Reporting
+                    </h4>
+
+                    <p>
+                        Report pollution, waste, water problems,
+                        deforestation and other environmental
+                        concerns with location and image details.
+                    </p>
+
+                    {% if current_user %}
+
+                    <a href="{{ url_for('reports.new_report') }}"
+                       class="btn btn-outline-success">
+                        Report Issue
+                    </a>
+
+                    {% else %}
+
+                    <a href="{{ url_for('auth.login') }}"
+                       class="btn btn-outline-success">
+                        Login to Report
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card feature-card h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="feature-icon">
+                        🏆
+                    </div>
+
+                    <h4>
+                        Eco Challenges
+                    </h4>
+
+                    <p>
+                        Complete sustainable activities, earn
+                        Eco Points and participate in a community
+                        leaderboard.
+                    </p>
+
+                    {% if current_user %}
+
+                    <a href="{{ url_for('challenges.challenges') }}"
+                       class="btn btn-outline-success">
+                        View Challenges
+                    </a>
+
+                    {% else %}
+
+                    <a href="{{ url_for('auth.register') }}"
+                       class="btn btn-outline-success">
+                        Join EcoGuardian
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="bg-light py-5">
+
+    <div class="container">
+
+        <div class="row text-center g-4">
+
+            <div class="col-md-3">
+
+                <div class="stat-card">
+
+                    <h2>🌱</h2>
+
+                    <h5>
+                        Environmental Awareness
+                    </h5>
+
+                    <p>
+                        Learn about important environmental
+                        issues.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="stat-card">
+
+                    <h2>🤖</h2>
+
+                    <h5>
+                        AI Classification
+                    </h5>
+
+                    <p>
+                        Automatically classify environmental
+                        problems.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="stat-card">
+
+                    <h2>♻️</h2>
+
+                    <h5>
+                        Community Action
+                    </h5>
+
+                    <p>
+                        Encourage users to take sustainable
+                        actions.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="stat-card">
+
+                    <h2>📊</h2>
+
+                    <h5>
+                        Data Analytics
+                    </h5>
+
+                    <p>
+                        Monitor environmental reports and
+                        community participation.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
