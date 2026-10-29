@@ -1,3 +1,4 @@
+from flask import current_app
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from werkzeug.security import check_password_hash, generate_password_hash
 from database.db import get_connection
@@ -16,7 +17,7 @@ def register():
             flash("Enter all details. Password must have 6 characters.", "danger")
             return render_template("register.html")
 
-        conn = get_connection()
+        conn = get_connection(current_app)
         cur = conn.cursor()
 
         try:
@@ -45,7 +46,7 @@ def login():
         email = request.form.get("email", "").strip().lower()
         password = request.form.get("password", "")
 
-        conn = get_connection()
+        conn = get_connection(current_app)
         cur = conn.cursor(dictionary=True)
 
         cur.execute("SELECT * FROM users WHERE email = %s", (email,))
