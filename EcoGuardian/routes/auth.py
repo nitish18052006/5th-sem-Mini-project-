@@ -108,7 +108,9 @@ def login():
             flash("Login successful.", "success")
 
             if user["role"] == "admin":
-                return redirect(url_for("admin.admin_dashboard"))
+                return redirect(url_for("admin.admin_d", "info")
+
+    return redirect(url_for("auth.lashboard"))
 
             return redirect(url_for("dashboard.dashboard"))
 
@@ -122,6 +124,4 @@ def logout():
 
     session.clear()
 
-    flash("You have been logged out.", "info")
-
-    return redirect(url_for("auth.login"))
+    flash("You have been logged out.ogin"))
